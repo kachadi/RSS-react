@@ -19,13 +19,12 @@
   font-weight: 600;
 }
 
-.search-input::placeholder{
+.search-input::placeholder {
   color: rgba(24, 26, 26, 0.4);
 }
 
 .search-input:focus {
   outline: none;
-
 }
 
 .search-btn {
@@ -47,5 +46,6 @@
 .search-btn:hover {
   background-color: #abd1c6;
   color: white;
-  text-shadow: #FFF 0 0 0.5rem, #FFF 0 0 0.1rem, #FFF 0 0 0.1rem, #CECBC6 0 0 0.15rem;
+  text-shadow: #fff 0 0 0.5rem, #fff 0 0 0.1rem, #fff 0 0 0.1rem,
+    #cecbc6 0 0 0.15rem;
 }

@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import './Item.css'
+import { PureComponent } from 'react';
+import './Item.css';
 
 interface ItemProps {
   key: number;
@@ -10,23 +10,38 @@ interface ItemProps {
   soundPath: string;
 }
 
-class Item extends Component<ItemProps> {
-
+class Item extends PureComponent<ItemProps> {
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { enTitle, ltnTitle, beTitle, imagePath, soundPath} = this.props;
+    const {
+      enTitle,
+      ltnTitle,
+      beTitle,
+      imagePath,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      soundPath,
+    } = this.props;
     return (
       <li className='item-card_wrapper'>
         <div className='item-card'>
           <div className='front-side'>
-            <img src={imagePath} className='item-card_image'/>
+            <img src={imagePath} className='item-card_image' alt={enTitle} />
             <div className='item-card_description'>
               <p className='item-card_text'>{beTitle}</p>
-              <p className='item-card_text en' >{enTitle}</p>
+              <p className='item-card_text en'>{enTitle}</p>
               <p className='item-card_text ltn'>{ltnTitle}</p>
               <div className='item-card_controls'>
-                <button type="button" className='item-card_btn sound' title='pronounce word'></button>
-                <button type="button" className='item-card_btn add' title='add word to learn'></button>
+                <button
+                  type='button'
+                  aria-label='soundButton'
+                  className='item-card_btn sound'
+                  title='pronounce word'
+                />
+                <button
+                  type='button'
+                  aria-label='addButton'
+                  className='item-card_btn add'
+                  title='add word to learn'
+                />
               </div>
             </div>
           </div>

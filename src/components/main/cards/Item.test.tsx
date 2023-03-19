@@ -10,5 +10,4 @@ describe('Item component', () => {
     expect(item).toBeInTheDocument();
     expect(item).toHaveClass('item-card_wrapper');
   });
-  
 });

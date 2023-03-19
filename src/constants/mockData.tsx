@@ -1,6 +1,6 @@
-import { IItem } from "../models/item.model";
+import { IItem } from '../models/item.model';
 
-export const mockItems: IItem[] = [
+const mockItems: IItem[] = [
   {
     id: 0,
     beTitle: 'птушка',
@@ -16,7 +16,7 @@ export const mockItems: IItem[] = [
     enTitle: 'cat',
     imagePath: './src/assets/img/cards-images/cat.png',
     soundPath: '',
-  }, 
+  },
   {
     id: 2,
     beTitle: 'жаба',
@@ -257,4 +257,6 @@ export const mockItems: IItem[] = [
     imagePath: './src/assets/img/cards-images/train.png',
     soundPath: '',
   },
-]
+];
+
+export default mockItems;

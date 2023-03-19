@@ -39,7 +39,6 @@ describe('SearchBar component', () => {
     expect(searchInput.value).toBe(testSearchValue);
   });
 
-  
   it('does not change input after going to another page', () => {
     const { searchInput } = setup();
     expect(searchInput).toBeInTheDocument();

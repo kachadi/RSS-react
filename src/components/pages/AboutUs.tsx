@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import './AboutUs.css';
 
-class AboutUs extends Component {
+class AboutUs extends PureComponent {
   render() {
     return (
       <div className='about-us_wrapper'>

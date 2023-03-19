@@ -1,13 +1,14 @@
-import { Component } from 'react';
-import './NotFound.css'
+import { PureComponent } from 'react';
+import './NotFound.css';
 
-class NotFound extends Component {
+class NotFound extends PureComponent {
   render() {
-    return <div className='not-found_wrapper'>
+    return (
+      <div className='not-found_wrapper'>
         <h1>Page not found :(</h1>
-      </div>;
+      </div>
+    );
   }
 }
 
 export default NotFound;
-

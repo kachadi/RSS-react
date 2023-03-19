@@ -1,13 +1,13 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import ItemsList from '../main/cards/ItemsList';
 import SearchBar from '../main/SearchBar';
 
-class Main extends Component {
+class Main extends PureComponent {
   render() {
     return (
-      <div className='wrapper'>
-        <SearchBar></SearchBar>
-        <ItemsList></ItemsList>
+      <div className="wrapper">
+        <SearchBar />
+        <ItemsList />
       </div>
     );
   }

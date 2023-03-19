@@ -15,7 +15,6 @@ const routes: Route[] = [
     path: '/about-us',
     component: AboutUs,
   },
-  
 ];
 
 export default routes;

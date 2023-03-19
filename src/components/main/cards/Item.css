@@ -84,12 +84,12 @@
 }
 
 .add {
-  background: url(./src/assets/svg/add_btn.svg)
+  background: url(./src/assets/svg/add_btn.svg);
 }
 
 .sound {
   margin-right: 0.3rem;
-  background: url(./src/assets/svg/sound_btn_red.svg)
+  background: url(./src/assets/svg/sound_btn_red.svg);
 }
 
 .item-card_btn:hover {

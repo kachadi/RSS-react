@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavItem.css';
 
@@ -7,16 +7,14 @@ interface NavItemProps {
   path: string;
 }
 
-class NavItem extends Component<NavItemProps> {
+class NavItem extends PureComponent<NavItemProps> {
   render() {
     const { title, path } = this.props;
     return (
       <li>
         <NavLink
           to={path}
-          className={({ isActive }) =>
-            isActive ? 'nav-link_active' : 'nav-link'
-          }
+          className={({ isActive }) => (isActive ? 'nav-link_active' : 'nav-link')}
         >
           {title}
         </NavLink>
