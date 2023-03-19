@@ -5,7 +5,7 @@ import SearchBar from '../main/SearchBar';
 class Main extends PureComponent {
   render() {
     return (
-      <div className="wrapper">
+      <div className='wrapper'>
         <SearchBar />
         <ItemsList />
       </div>

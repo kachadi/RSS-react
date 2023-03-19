@@ -6,7 +6,7 @@ class Header extends PureComponent {
   render() {
     return (
       <header>
-        <div className="wrapper header_wrapper">
+        <div className='wrapper header_wrapper'>
           <Navigation />
         </div>
       </header>

@@ -13,8 +13,8 @@ class App extends PureComponent {
         <Header />
         <Routes>
           <Route index element={<Main />} />
-          <Route path="about-us" element={<AboutUs />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path='about-us' element={<AboutUs />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     );

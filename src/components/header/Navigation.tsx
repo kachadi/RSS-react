@@ -7,13 +7,9 @@ class Navigation extends PureComponent {
   render() {
     return (
       <nav>
-        <ul className="nav-list">
+        <ul className='nav-list'>
           {routes.map((route) => (
-            <NavItem
-              key={route.id}
-              title={route.title}
-              path={route.path}
-            />
+            <NavItem key={route.id} title={route.title} path={route.path} />
           ))}
         </ul>
       </nav>
