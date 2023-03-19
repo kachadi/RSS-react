@@ -19,21 +19,19 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
 
   searchInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ inputValue: event.target.value });
-    console.log(this.state.inputValue);
   };
 
   searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
   };
 
-
-  componentWillUnmount() {
-    console.log('unmounting');
-    
+  componentWillUnmount() { 
     localStorage.setItem('inputValue', this.state.inputValue);
   }
 
   render() {
+   
+    
     return (
       <form className='search-form' onSubmit={this.searchFormHandler}>
         <div className='form-control'>

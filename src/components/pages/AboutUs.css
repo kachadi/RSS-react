@@ -1,0 +1,25 @@
+.about-us_wrapper {
+  margin: 0 auto;
+  margin-top: 10rem;
+  padding: 2rem;
+  width: 120rem;
+  height: 60rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #fffffd;
+  border: #001e1d 0.4rem solid;
+  border-radius: 3rem;
+}
+
+.about-us_wrapper h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.about-us_wrapper p {
+  margin-top: 2rem;
+  font-size: 1.8rem;
+  font-family: 'Proxima Nova', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
