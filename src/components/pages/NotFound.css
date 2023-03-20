@@ -1,0 +1,16 @@
+.not-found_wrapper {
+  margin: 0 auto;
+  margin-top: 10rem;
+  width: 60rem;
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffffd;
+  border: #001e1d 0.4rem solid;
+  border-radius: 3rem;
+}
+
+.not-found_wrapper h1 {
+  font-size: 5rem;
+}
