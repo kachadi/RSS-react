@@ -1,16 +1,20 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import Item from './Item';
 import './ItemsList.css';
 import { IItem } from '../../../models/item.model';
-import mockItems from '../../../constants/mockData';
 
-class ItemsList extends Component {
-  searchingItems: IItem[] = mockItems.slice(0, 8);
+interface ItemListProps {
+  items: IItem[];
+}
+
+class ItemsList extends PureComponent<ItemListProps> {
+  // searchingItems: IItem[] = mockItems.slice(0, 2);
 
   render() {
+    const { items } = this.props;
     return (
       <ul className='items'>
-        {this.searchingItems.map((item) => (
+        {items.map((item) => (
           <Item
             key={item.id}
             beTitle={item.beTitle}
@@ -18,6 +22,7 @@ class ItemsList extends Component {
             enTitle={item.enTitle}
             imagePath={item.imagePath}
             soundPath={item.soundPath}
+            category={item.category}
           />
         ))}
       </ul>

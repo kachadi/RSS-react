@@ -8,6 +8,7 @@ interface ItemProps {
   enTitle: string;
   imagePath: string;
   soundPath: string;
+  category: string;
 }
 
 class Item extends PureComponent<ItemProps> {
@@ -19,6 +20,7 @@ class Item extends PureComponent<ItemProps> {
       imagePath,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       soundPath,
+      category,
     } = this.props;
     return (
       <li className='item-card_wrapper'>
@@ -43,6 +45,7 @@ class Item extends PureComponent<ItemProps> {
                   title='add word to learn'
                 />
               </div>
+              <p className='item-card_category'>{category}</p>
             </div>
           </div>
         </div>

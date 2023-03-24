@@ -44,6 +44,7 @@
 .item-card_description {
   display: grid;
   grid-template-columns: 2fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
   padding: 0 1.8rem 1rem 1.8rem;
   overflow: hidden;
 }
@@ -69,6 +70,8 @@
 }
 
 .item-card_controls {
+  align-self: center;
+  grid-row: span 2;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -94,4 +97,17 @@
 
 .item-card_btn:hover {
   transform: rotate(360deg);
+}
+
+.item-card_category {
+  
+  width: fit-content;
+  height: fit-content;
+  padding: .3rem;
+  align-self: center;
+  background-color: #abd1c6;
+  border: #001e1d 0.2rem solid;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
 }

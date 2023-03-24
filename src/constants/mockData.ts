@@ -8,6 +8,7 @@ const mockItems: IItem[] = [
     enTitle: 'bird',
     imagePath: './src/assets/img/cards-images/bird.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 1,
@@ -16,6 +17,7 @@ const mockItems: IItem[] = [
     enTitle: 'cat',
     imagePath: './src/assets/img/cards-images/cat.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ const mockItems: IItem[] = [
     enTitle: 'frog',
     imagePath: './src/assets/img/cards-images/frog.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ const mockItems: IItem[] = [
     enTitle: 'cow',
     imagePath: './src/assets/img/cards-images/cow.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 4,
@@ -40,6 +44,7 @@ const mockItems: IItem[] = [
     enTitle: 'lion',
     imagePath: './src/assets/img/cards-images/lion.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 5,
@@ -48,6 +53,7 @@ const mockItems: IItem[] = [
     enTitle: 'monkey',
     imagePath: './src/assets/img/cards-images/monkey.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 6,
@@ -56,6 +62,7 @@ const mockItems: IItem[] = [
     enTitle: 'pig',
     imagePath: './src/assets/img/cards-images/pig.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 7,
@@ -64,6 +71,7 @@ const mockItems: IItem[] = [
     enTitle: 'tiger',
     imagePath: './src/assets/img/cards-images/tiger.png',
     soundPath: '',
+    category: 'animals',
   },
   {
     id: 8,
@@ -72,6 +80,7 @@ const mockItems: IItem[] = [
     enTitle: 'cloud',
     imagePath: './src/assets/img/cards-images/cloud.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 9,
@@ -80,6 +89,7 @@ const mockItems: IItem[] = [
     enTitle: 'cold',
     imagePath: './src/assets/img/cards-images/cold.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 10,
@@ -88,6 +98,7 @@ const mockItems: IItem[] = [
     enTitle: 'heat',
     imagePath: './src/assets/img/cards-images/hot.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 11,
@@ -96,6 +107,7 @@ const mockItems: IItem[] = [
     enTitle: 'rainbow',
     imagePath: './src/assets/img/cards-images/rainbow.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 12,
@@ -104,6 +116,7 @@ const mockItems: IItem[] = [
     enTitle: 'rain',
     imagePath: './src/assets/img/cards-images/rain.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 13,
@@ -112,6 +125,7 @@ const mockItems: IItem[] = [
     enTitle: 'snow',
     imagePath: './src/assets/img/cards-images/snow.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 14,
@@ -120,6 +134,7 @@ const mockItems: IItem[] = [
     enTitle: 'thunderstorm',
     imagePath: './src/assets/img/cards-images/stormy.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 15,
@@ -128,6 +143,7 @@ const mockItems: IItem[] = [
     enTitle: 'wind',
     imagePath: './src/assets/img/cards-images/wind.png',
     soundPath: '',
+    category: 'weather',
   },
   {
     id: 16,
@@ -136,6 +152,7 @@ const mockItems: IItem[] = [
     enTitle: 'backpack',
     imagePath: './src/assets/img/cards-images/backpack.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 17,
@@ -144,6 +161,7 @@ const mockItems: IItem[] = [
     enTitle: 'blackboard',
     imagePath: './src/assets/img/cards-images/blackboard.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 18,
@@ -152,6 +170,7 @@ const mockItems: IItem[] = [
     enTitle: 'book',
     imagePath: './src/assets/img/cards-images/book.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 19,
@@ -160,6 +179,7 @@ const mockItems: IItem[] = [
     enTitle: 'calculator',
     imagePath: './src/assets/img/cards-images/calculator.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 20,
@@ -168,6 +188,7 @@ const mockItems: IItem[] = [
     enTitle: 'globe',
     imagePath: './src/assets/img/cards-images/globe.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 21,
@@ -176,6 +197,7 @@ const mockItems: IItem[] = [
     enTitle: 'pen',
     imagePath: './src/assets/img/cards-images/pen.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 22,
@@ -184,6 +206,7 @@ const mockItems: IItem[] = [
     enTitle: 'pencil',
     imagePath: './src/assets/img/cards-images/pencil.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 23,
@@ -192,6 +215,7 @@ const mockItems: IItem[] = [
     enTitle: 'ruler',
     imagePath: './src/assets/img/cards-images/ruler.png',
     soundPath: '',
+    category: 'things',
   },
   {
     id: 24,
@@ -200,6 +224,7 @@ const mockItems: IItem[] = [
     enTitle: 'bicycle',
     imagePath: './src/assets/img/cards-images/bicycle.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 25,
@@ -208,6 +233,7 @@ const mockItems: IItem[] = [
     enTitle: 'bus',
     imagePath: './src/assets/img/cards-images/bus.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 26,
@@ -216,6 +242,7 @@ const mockItems: IItem[] = [
     enTitle: 'boat',
     imagePath: './src/assets/img/cards-images/boat.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 27,
@@ -224,6 +251,7 @@ const mockItems: IItem[] = [
     enTitle: 'car',
     imagePath: './src/assets/img/cards-images/car.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 28,
@@ -232,6 +260,7 @@ const mockItems: IItem[] = [
     enTitle: 'helicopter',
     imagePath: './src/assets/img/cards-images/helicopter.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 29,
@@ -240,6 +269,7 @@ const mockItems: IItem[] = [
     enTitle: 'rocket',
     imagePath: './src/assets/img/cards-images/rocket.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 30,
@@ -248,6 +278,7 @@ const mockItems: IItem[] = [
     enTitle: 'skateboard',
     imagePath: './src/assets/img/cards-images/skateboard.png',
     soundPath: '',
+    category: 'vehicles',
   },
   {
     id: 31,
@@ -256,6 +287,7 @@ const mockItems: IItem[] = [
     enTitle: 'train',
     imagePath: './src/assets/img/cards-images/train.png',
     soundPath: '',
+    category: 'vehicles',
   },
 ];
 

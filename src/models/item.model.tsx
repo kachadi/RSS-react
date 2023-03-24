@@ -5,4 +5,5 @@ export interface IItem {
   enTitle: string;
   imagePath: string;
   soundPath: string;
+  category: string;
 }
