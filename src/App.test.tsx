@@ -32,4 +32,13 @@ describe('Router', () => {
       /about us/i,
     );
   });
+
+  it('renders the Add new form page if route is new-word', () => {
+    window.history.pushState({}, '', '/new-word');
+
+    render(<App />);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /new word/i,
+    );
+  });
 });

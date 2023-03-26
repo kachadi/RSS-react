@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ItemsList from './ItemsList';
+import Main from '../../pages/Main';
 
 describe('Item component', () => {
   it('renders the Item component', () => {
-    render(<ItemsList />);
+    render(<Main />);
     const item = screen.getAllByRole('listitem')[0];
 
     expect(item).toBeInTheDocument();

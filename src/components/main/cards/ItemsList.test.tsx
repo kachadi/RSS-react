@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ItemsList from './ItemsList';
+import Main from '../../pages/Main';
 
 describe('ItemsList component', () => {
   it('renders the ItemList component', () => {
-    render(<ItemsList />);
+    render(<Main />);
 
     const itemsList = screen.getByRole('list');
 
@@ -13,7 +13,7 @@ describe('ItemsList component', () => {
   });
 
   it('length of item list - 8', () => {
-    render(<ItemsList />);
+    render(<Main />);
 
     const itemsCount = screen.getAllByRole('listitem').length;
 

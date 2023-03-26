@@ -48,7 +48,8 @@
     "react/require-default-props": "off",
     "object-curly-newline": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   "settings": {
     "react": {

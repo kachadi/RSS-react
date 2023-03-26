@@ -14,22 +14,14 @@ class AddNewWord extends PureComponent<AddNewWordProps, AddNewWordState> {
   constructor(props: AddNewWordProps) {
     super(props);
     this.state = {
-      newItems: [
-        {
-          id: 0,
-          beTitle: 'птушка',
-          ltnTitle: 'ptuška',
-          enTitle: 'bird',
-          imagePath: './src/assets/img/cards-images/bird.png',
-          soundPath: '',
-          category: 'animals',
-        },
-      ],
+      newItems: [],
     };
   }
 
   addNewWordHandler = (item: IItem) => {
-    this.setState({ newItems: [...this.state.newItems, item] });
+    this.setState((previousState) => ({
+      newItems: [...previousState.newItems, item],
+    }));
   };
 
   render() {

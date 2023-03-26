@@ -118,7 +118,6 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       const enteredLtnWord = this.ltnWordInputRef.current?.value;
       const enteredCategory = this.categorySelectRef.current?.value;
       const uploadedImage = this.uploadImageRef.current?.files;
-
       const transformedUploadedImage = uploadedImage ? URL.createObjectURL(uploadedImage[0]) : '';
 
       const newItem: IItem = {
@@ -133,24 +132,36 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
 
       this.props.onAddNewWord(newItem);
 
-      event.target.reset();
+      this.enWordInputRef.current!.value = '';
+      this.beWordInputRef.current!.value = '';
+      this.ltnWordInputRef.current!.value = '';
+      this.dateInputRef.current!.value = '';
+      this.uploadImageRef.current!.value = '';
+      this.categorySelectRef.current!.value = 'other';
+      this.consentDataRef.current!.checked = false;
+      this.newsletterRef.current!.checked = true;
+      this.resetHandler();
     }
   };
 
-  resetHandler = (event: React.ChangeEvent<HTMLFormElement>) => {
+  resetHandler = () => {
     this.setState({
       formErrors: {
         ...falsyFormErrors,
       },
     });
-    event.target.reset();
   };
 
   render() {
     return (
       <div className='form_wrapper'>
         <h1>Add a new word</h1>
-        <form className='form' onSubmit={this.submitHandler} onReset={this.resetHandler}>
+        <form
+          className='form'
+          name='newWordForm'
+          onSubmit={this.submitHandler}
+          onReset={this.resetHandler}
+        >
           <div className='form_controls'>
             <FormInput
               id='en_word'
@@ -228,14 +239,14 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
                   id='yes'
                   name='switch'
                   className='btn-switch__radio btn-switch__radio_yes'
-                  ref={this.newsletterRef}
                 />
                 <input
                   type='radio'
-                  checked
+                  defaultChecked
                   id='no'
                   name='switch'
                   className='btn-switch__radio btn-switch__radio_no'
+                  ref={this.newsletterRef}
                 />
                 <label htmlFor='yes' className='btn-switch__label btn-switch__label_yes'>
                   <span className='btn-switch__txt'>Yes</span>
