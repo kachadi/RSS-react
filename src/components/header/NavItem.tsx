@@ -14,9 +14,7 @@ class NavItem extends PureComponent<NavItemProps> {
       <li>
         <NavLink
           to={path}
-          className={({ isActive }) =>
-            isActive ? 'nav-link_active' : 'nav-link'
-          }
+          className={({ isActive }) => (isActive ? 'nav-link_active' : 'nav-link')}
         >
           {title}
         </NavLink>

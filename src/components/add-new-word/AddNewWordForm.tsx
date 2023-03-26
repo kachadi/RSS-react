@@ -3,6 +3,7 @@ import CATEGORIES from '../../constants/categories';
 import FORM_ERROR_MESSAGES from '../../constants/errorMsgs';
 import { IItem } from '../../models/item.model';
 import './AddNewWordForm.css';
+import FormInput from './FormInput';
 
 const falsyFormErrors = {
   enWord: false,
@@ -28,7 +29,6 @@ interface Errors {
 
 interface AddNewWordFormState {
   formErrors: Errors;
-  // submitDisabled: boolean;
 }
 
 class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState> {
@@ -54,7 +54,6 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       formErrors: {
         ...falsyFormErrors,
       },
-      // submitDisabled: true,
     };
   }
 
@@ -135,7 +134,6 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       this.props.onAddNewWord(newItem);
 
       event.target.reset();
-      // this.setState({ submitDisabled: true });
     }
   };
 
@@ -154,66 +152,46 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
         <h1>Add a new word</h1>
         <form className='form' onSubmit={this.submitHandler} onReset={this.resetHandler}>
           <div className='form_controls'>
-            <label htmlFor='en_word'>Word in English:</label>
-            <input
+            <FormInput
               id='en_word'
               type='text'
+              label='Word in English:'
               autoComplete='off'
               placeholder='E.g. Bird'
               ref={this.enWordInputRef}
-              className={this.state.formErrors.enWord ? 'input error' : 'input'}
+              error={!!this.state.formErrors.enWord}
+              errorMessage={this.state.formErrors.enWord}
             />
-            <div className={this.state.formErrors.enWord ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.enWord}
-            </div>
 
-            <label htmlFor='be_word'>Word in Belarusian:</label>
-            <input
+            <FormInput
               id='be_word'
               type='text'
+              label='Word in Belarusian:'
               autoComplete='off'
               placeholder='E.g. Птушка'
-              className={this.state.formErrors.beWord ? 'input error' : 'input'}
               ref={this.beWordInputRef}
+              error={!!this.state.formErrors.beWord}
+              errorMessage={this.state.formErrors.beWord}
             />
-            <div className={this.state.formErrors.beWord ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.beWord}
-            </div>
 
-            <label htmlFor='ltn_word'>
-              Word in{' '}
-              <a
-                href='https://en.wikipedia.org/wiki/Belarusian_Latin_alphabet'
-                target='_blank'
-                rel='noopener noreferrer'
-                title='see about'
-              >
-                Belarusian Latin alphabet
-              </a>{' '}
-              (Łacinka):
-            </label>
-            <input
+            <FormInput
               id='ltn_word'
               type='text'
               autoComplete='off'
               placeholder='E.g. Ptuška'
-              className={this.state.formErrors.ltnWord ? 'input error' : 'input'}
               ref={this.ltnWordInputRef}
+              error={!!this.state.formErrors.ltnWord}
+              errorMessage={this.state.formErrors.ltnWord}
             />
-            <div className={this.state.formErrors.ltnWord ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.ltnWord}
-            </div>
 
-            <label htmlFor='date'>Date:</label>
-            <input
+            <FormInput
               id='date'
               type='date'
-              className={this.state.formErrors.date ? 'input error' : 'input'}
+              label='Date:'
               ref={this.dateInputRef}
+              error={!!this.state.formErrors.date}
+              errorMessage={this.state.formErrors.date}
             />
-            <div className={this.state.formErrors.date ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.date}
-            </div>
 
             <label htmlFor='category'>Select a category:</label>
             <select id='category' ref={this.categorySelectRef}>
@@ -224,18 +202,14 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
               ))}
             </select>
 
-            <label htmlFor='upload-image'>Upload image:</label>
-            <input
-              type='file'
+            <FormInput
               id='upload-image'
-              className={
-                this.state.formErrors.image ? 'input upload-input error' : 'input upload-input'
-              }
+              type='file'
+              label='Upload image:'
               ref={this.uploadImageRef}
+              error={!!this.state.formErrors.image}
+              errorMessage={this.state.formErrors.image}
             />
-            <div className={this.state.formErrors.image ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.image}
-            </div>
 
             <label className='checkbox-container'>
               I consent to my personal data:
@@ -274,12 +248,7 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
           </div>
 
           <div className='form_actions'>
-            <input
-              type='submit'
-              value='Submit'
-              className='form_btns'
-              // disabled={this.state.submitDisabled}
-            />
+            <input type='submit' value='Submit' className='form_btns' />
             <input type='reset' value='Reset' className='form_btns' />
           </div>
         </form>
