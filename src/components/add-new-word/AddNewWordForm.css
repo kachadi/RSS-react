@@ -34,11 +34,11 @@
   color: rgba(0, 30, 29, 0.5);
 }
 
-.form_controls input,
+.input,
 .form_controls select {
   box-sizing: border-box;
   margin-top: 0.7rem;
-  margin-bottom: 1.8rem;
+  margin-bottom: 0.3rem;
   padding: 1rem;
   height: 4.5rem;
   background-color: #abd1c6;
@@ -49,13 +49,18 @@
   transition: all 0.3s ease-in-out;
 }
 
+.form_controls select {
+  margin-bottom: 2.3rem;
+
+}
+
 .form_controls input:hover,
 .form_controls input:focus,
 .form_controls select:hover {
   background-color: #f9bc60;
 }
 
-.date-input {
+#date {
   cursor: text;
 }
 
@@ -179,7 +184,7 @@
   margin-left: 1rem;
 }
 
-.form_btns[type='submit'] .non-active {
+.form_btns[type='submit'].non-active {
   filter: saturate(10%);
   cursor: not-allowed;
 }
@@ -189,7 +194,7 @@
 }
 
 .switch-container {
-  margin-top: 2rem;
+  /* margin-top: 0.5rem; */
   width: fit-content;
   height: 4rem;
   display: flex;
@@ -296,4 +301,23 @@
 .btn-switch__radio_yes:checked ~ .btn-switch__label:hover:before {
   background-color: #f9bc60;
 }
+
+.error {
+
+  background-color: rgba(225, 97, 98, 0.85);
+
+}
+
+.error-msg {
+  color: #e16162;
+  margin-bottom: 1rem;
+  height: 1rem;
+}
+
+.unvisible {
+  visibility: hidden;
+}
+
+
+
 

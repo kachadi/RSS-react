@@ -8,10 +8,9 @@ interface ItemListProps {
 }
 
 class ItemsList extends PureComponent<ItemListProps> {
-  // searchingItems: IItem[] = mockItems.slice(0, 2);
-
   render() {
     const { items } = this.props;
+
     return (
       <ul className='items'>
         {items.map((item) => (
