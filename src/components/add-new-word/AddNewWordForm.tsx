@@ -2,6 +2,7 @@ import { createRef, Component } from 'react';
 import CATEGORIES from '../../constants/categories';
 import FORM_ERROR_MESSAGES from '../../constants/errorMsgs';
 import { IItem } from '../../models/item.model';
+import SuccessAddedModal from '../UI/SuccessAddedModal';
 import './AddNewWordForm.css';
 import FormInput from './FormInput';
 
@@ -29,6 +30,7 @@ interface Errors {
 
 interface AddNewWordFormState {
   formErrors: Errors;
+  submitForm: boolean;
 }
 
 class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState> {
@@ -54,6 +56,7 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       formErrors: {
         ...falsyFormErrors,
       },
+      submitForm: false,
     };
   }
 
@@ -141,6 +144,7 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       this.consentDataRef.current!.checked = false;
       this.newsletterRef.current!.checked = true;
       this.resetHandler();
+      this.setState({ submitForm: true });
     }
   };
 
@@ -152,118 +156,127 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
     });
   };
 
+  addModal = () => {
+    this.setState({
+      submitForm: false,
+    });
+  };
+
   render() {
     return (
-      <div className='form_wrapper'>
-        <h1>Add a new word</h1>
-        <form
-          className='form'
-          name='newWordForm'
-          onSubmit={this.submitHandler}
-          onReset={this.resetHandler}
-        >
-          <div className='form_controls'>
-            <FormInput
-              id='en_word'
-              type='text'
-              label='Word in English:'
-              autoComplete='off'
-              placeholder='E.g. Bird'
-              ref={this.enWordInputRef}
-              error={!!this.state.formErrors.enWord}
-              errorMessage={this.state.formErrors.enWord}
-            />
+      <>
+        {this.state.submitForm && <SuccessAddedModal onAddModal={this.addModal} />}
+        <div className='form_wrapper'>
+          <h1>Add a new word</h1>
+          <form
+            className='form'
+            name='newWordForm'
+            onSubmit={this.submitHandler}
+            onReset={this.resetHandler}
+          >
+            <div className='form_controls'>
+              <FormInput
+                id='en_word'
+                type='text'
+                label='Word in English:'
+                autoComplete='off'
+                placeholder='E.g. Bird'
+                ref={this.enWordInputRef}
+                error={!!this.state.formErrors.enWord}
+                errorMessage={this.state.formErrors.enWord}
+              />
 
-            <FormInput
-              id='be_word'
-              type='text'
-              label='Word in Belarusian:'
-              autoComplete='off'
-              placeholder='E.g. Птушка'
-              ref={this.beWordInputRef}
-              error={!!this.state.formErrors.beWord}
-              errorMessage={this.state.formErrors.beWord}
-            />
+              <FormInput
+                id='be_word'
+                type='text'
+                label='Word in Belarusian:'
+                autoComplete='off'
+                placeholder='E.g. Птушка'
+                ref={this.beWordInputRef}
+                error={!!this.state.formErrors.beWord}
+                errorMessage={this.state.formErrors.beWord}
+              />
 
-            <FormInput
-              id='ltn_word'
-              type='text'
-              autoComplete='off'
-              placeholder='E.g. Ptuška'
-              ref={this.ltnWordInputRef}
-              error={!!this.state.formErrors.ltnWord}
-              errorMessage={this.state.formErrors.ltnWord}
-            />
+              <FormInput
+                id='ltn_word'
+                type='text'
+                autoComplete='off'
+                placeholder='E.g. Ptuška'
+                ref={this.ltnWordInputRef}
+                error={!!this.state.formErrors.ltnWord}
+                errorMessage={this.state.formErrors.ltnWord}
+              />
 
-            <FormInput
-              id='date'
-              type='date'
-              label='Date:'
-              ref={this.dateInputRef}
-              error={!!this.state.formErrors.date}
-              errorMessage={this.state.formErrors.date}
-            />
+              <FormInput
+                id='date'
+                type='date'
+                label='Date:'
+                ref={this.dateInputRef}
+                error={!!this.state.formErrors.date}
+                errorMessage={this.state.formErrors.date}
+              />
 
-            <label htmlFor='category'>Select a category:</label>
-            <select id='category' ref={this.categorySelectRef}>
-              {CATEGORIES.map((category) => (
-                <option key={category} value={category} className='select-option'>
-                  {category}
-                </option>
-              ))}
-            </select>
+              <label htmlFor='category'>Select a category:</label>
+              <select id='category' ref={this.categorySelectRef}>
+                {CATEGORIES.map((category) => (
+                  <option key={category} value={category} className='select-option'>
+                    {category}
+                  </option>
+                ))}
+              </select>
 
-            <FormInput
-              id='upload-image'
-              type='file'
-              label='Upload image:'
-              ref={this.uploadImageRef}
-              error={!!this.state.formErrors.image}
-              errorMessage={this.state.formErrors.image}
-            />
+              <FormInput
+                id='upload-image'
+                type='file'
+                label='Upload image:'
+                ref={this.uploadImageRef}
+                error={!!this.state.formErrors.image}
+                errorMessage={this.state.formErrors.image}
+              />
 
-            <label className='checkbox-container'>
-              I consent to my personal data:
-              <input type='checkbox' defaultChecked={false} ref={this.consentDataRef} />
-              <span className='checkmark' />
-            </label>
-            <div className={this.state.formErrors.consent ? 'error-msg' : 'error-msg unvisible'}>
-              {this.state.formErrors.consent}
-            </div>
+              <label className='checkbox-container'>
+                I consent to my personal data:
+                <input type='checkbox' defaultChecked={false} ref={this.consentDataRef} />
+                <span className='checkmark' />
+              </label>
+              <div className={this.state.formErrors.consent ? 'error-msg' : 'error-msg unvisible'}>
+                {this.state.formErrors.consent}
+              </div>
 
-            <div className='switch-container'>
-              <p>I want to recieve a newsletter:</p>
-              <div className='btn-switch'>
-                <input
-                  type='radio'
-                  id='yes'
-                  name='switch'
-                  className='btn-switch__radio btn-switch__radio_yes'
-                />
-                <input
-                  type='radio'
-                  defaultChecked
-                  id='no'
-                  name='switch'
-                  className='btn-switch__radio btn-switch__radio_no'
-                  ref={this.newsletterRef}
-                />
-                <label htmlFor='yes' className='btn-switch__label btn-switch__label_yes'>
-                  <span className='btn-switch__txt'>Yes</span>
-                </label>
-                <label htmlFor='no' className='btn-switch__label btn-switch__label_no'>
-                  <span className='btn-switch__txt'>No</span>
-                </label>
+              <div className='switch-container'>
+                <p>I want to recieve a newsletter:</p>
+                <div className='btn-switch'>
+                  <input
+                    type='radio'
+                    id='yes'
+                    name='switch'
+                    className='btn-switch__radio btn-switch__radio_yes'
+                  />
+                  <input
+                    type='radio'
+                    defaultChecked
+                    id='no'
+                    name='switch'
+                    className='btn-switch__radio btn-switch__radio_no'
+                    ref={this.newsletterRef}
+                  />
+                  <label htmlFor='yes' className='btn-switch__label btn-switch__label_yes'>
+                    <span className='btn-switch__txt'>Yes</span>
+                  </label>
+                  <label htmlFor='no' className='btn-switch__label btn-switch__label_no'>
+                    <span className='btn-switch__txt'>No</span>
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className='form_actions'>
-            <input type='submit' value='Submit' className='form_btns' />
-            <input type='reset' value='Reset' className='form_btns' />
-          </div>
-        </form>
-      </div>
+            <div className='form_actions'>
+              <input type='submit' value='Submit' className='form_btns' />
+              <input type='reset' value='Reset' className='form_btns' />
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 }

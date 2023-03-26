@@ -153,6 +153,8 @@ describe('AddNewWordForm component', () => {
       fireEvent.blur(submitInput);
     });
 
+    fireEvent.click(screen.getByText('Cool!'));
+
     expect(enWordInput.value).toBe(emptyFormValues.enWord);
     expect(beWordInput.value).toBe(emptyFormValues.beWord);
     expect(ltnWordInput.value).toBe(emptyFormValues.ltnWord);
