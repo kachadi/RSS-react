@@ -45,9 +45,7 @@ describe('SearchBar component', () => {
 
     fireEvent.change(searchInput, { target: { value: testSearchValue } });
     fireEvent.click(screen.getByText('About us'));
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'About us',
-    );
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('About us');
 
     fireEvent.click(screen.getByText('Main'));
     const newSearchInput: HTMLInputElement = screen.getByRole('textbox');

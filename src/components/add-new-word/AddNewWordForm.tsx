@@ -1,6 +1,7 @@
 import { createRef, Component } from 'react';
 import CATEGORIES from '../../constants/categories';
 import FORM_ERROR_MESSAGES from '../../constants/errorMsgs';
+import { Errors } from '../../models/errors.model';
 import { IItem } from '../../models/item.model';
 import SuccessAddedModal from '../UI/SuccessAddedModal';
 import './AddNewWordForm.css';
@@ -17,15 +18,6 @@ const falsyFormErrors = {
 
 interface AddNewWordFormProps {
   onAddNewWord: (item: IItem) => void;
-}
-
-interface Errors {
-  enWord: boolean | string;
-  beWord: boolean | string;
-  ltnWord: boolean | string;
-  date: boolean | string;
-  image: boolean | string;
-  consent: boolean | string;
 }
 
 interface AddNewWordFormState {
@@ -143,6 +135,7 @@ class AddNewWordForm extends Component<AddNewWordFormProps, AddNewWordFormState>
       this.categorySelectRef.current!.value = 'other';
       this.consentDataRef.current!.checked = false;
       this.newsletterRef.current!.checked = true;
+
       this.resetHandler();
       this.setState({ submitForm: true });
     }

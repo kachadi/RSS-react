@@ -100,10 +100,9 @@
 }
 
 .item-card_category {
-  
   width: fit-content;
   height: fit-content;
-  padding: .3rem;
+  padding: 0.3rem;
   align-self: center;
   background-color: #abd1c6;
   border: #001e1d 0.2rem solid;

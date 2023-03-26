@@ -9,9 +9,7 @@ describe('AboutUs component', () => {
 
   it('find heading', () => {
     render(<AboutUs />);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'About us',
-    );
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('About us');
   });
 
   it('find lorem text', () => {
