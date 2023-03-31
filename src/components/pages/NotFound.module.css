@@ -1,4 +1,4 @@
-.not-found_wrapper {
+.notFoundWrapper {
   margin: 0 auto;
   margin-top: 10rem;
   width: 60rem;
@@ -11,6 +11,6 @@
   border-radius: 3rem;
 }
 
-.not-found_wrapper h1 {
+.notFoundWrapper h1 {
   font-size: 5rem;
 }

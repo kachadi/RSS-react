@@ -1,58 +1,48 @@
-import { Component } from 'react';
-import './SearchBar.css';
+import { useEffect, useRef, useState } from 'react';
+import styles from './SearchBar.module.css';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface SearchBarProps {}
+function SearchBar() {
+  const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
+  const inputValueRef: React.MutableRefObject<string> = useRef('');
 
-interface SearchBarState {
-  inputValue: string;
-}
+  useEffect(() => {
+    inputValueRef.current = inputValue;
+  }, [inputValue]);
 
-class SearchBar extends Component<SearchBarProps, SearchBarState> {
-  constructor(props: SearchBarProps) {
-    super(props);
-    this.state = {
-      inputValue: localStorage.getItem('inputValue') || '',
-    };
-  }
+  useEffect(
+    () => () => {
+      localStorage.setItem('inputValue', inputValueRef.current);
+    },
+    [],
+  );
 
-  componentWillUnmount() {
-    const { inputValue } = this.state;
-    localStorage.setItem('inputValue', inputValue);
-  }
-
-  searchInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ inputValue: event.target.value });
+  const searchInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setInputValue(event.target.value);
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
+  const searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
   };
 
-  render() {
-    const { inputValue } = this.state;
-
-    return (
-      <form className='search-form' onSubmit={this.searchFormHandler}>
-        <div className='form-control'>
-          <input
-            id='search'
-            type='text'
-            placeholder='start typing a word'
-            className='search-input'
-            onChange={this.searchInputHandler}
-            value={inputValue}
-          />
-        </div>
-        <div className='form-action'>
-          <button type='submit' className='search-btn'>
-            search
-          </button>
-        </div>
-      </form>
-    );
-  }
+  return (
+    <form className={styles.searchForm} onSubmit={searchFormHandler}>
+      <div className='form-control'>
+        <input
+          id='search'
+          type='text'
+          placeholder='start typing a word'
+          className={styles.searchInput}
+          onChange={searchInputHandler}
+          value={inputValue}
+        />
+      </div>
+      <div className='form-action'>
+        <button type='submit' className={styles.searchBtn}>
+          search
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default SearchBar;

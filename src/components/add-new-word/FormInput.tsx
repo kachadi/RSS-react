@@ -7,8 +7,6 @@ interface FormInputProps {
   errorMessage: string | boolean;
   error: boolean;
   autoComplete?: string;
-  placeholder?: string;
-  // ref: LegacyRef<HTMLInputElement>;
   innerRef?: LegacyRef<HTMLInputElement>;
 }
 
