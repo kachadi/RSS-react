@@ -1,6 +1,7 @@
 import { describe, it } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
+import styles from './AddNewWordForm.module.css';
 
 const validFormValues = {
   enWord: 'Dog',
@@ -69,29 +70,29 @@ describe('AddNewWordForm component', () => {
     } = setup();
 
     expect(form).toBeInTheDocument();
-    expect(form).toHaveClass('form');
+    expect(form).toHaveClass(styles.form);
 
     expect(enWordInput).toBeInTheDocument();
     expect(enWordInput).toHaveAttribute('type', 'text');
-    expect(enWordInput).toHaveClass('input');
+    expect(enWordInput).toHaveClass(styles.input);
 
     expect(beWordInput).toBeInTheDocument();
     expect(beWordInput).toHaveAttribute('type', 'text');
-    expect(beWordInput).toHaveClass('input');
+    expect(beWordInput).toHaveClass(styles.input);
 
     expect(ltnWordInput).toBeInTheDocument();
     expect(ltnWordInput).toHaveAttribute('type', 'text');
-    expect(ltnWordInput).toHaveClass('input');
+    expect(ltnWordInput).toHaveClass(styles.input);
 
     expect(dateInput).toBeInTheDocument();
     expect(dateInput).toHaveAttribute('type', 'date');
-    expect(dateInput).toHaveClass('input');
+    expect(dateInput).toHaveClass(styles.input);
 
     expect(categorySelect).toBeInTheDocument();
 
     expect(imageInput).toBeInTheDocument();
     expect(imageInput).toHaveAttribute('type', 'file');
-    expect(imageInput).toHaveClass('input');
+    expect(imageInput).toHaveClass(styles.input);
 
     expect(consentInput).toBeInTheDocument();
     expect(consentInput).toHaveAttribute('type', 'checkbox');
@@ -103,11 +104,11 @@ describe('AddNewWordForm component', () => {
 
     expect(submitInput).toBeInTheDocument();
     expect(submitInput).toHaveAttribute('type', 'submit');
-    expect(submitInput).toHaveClass('form_btns');
+    expect(submitInput).toHaveClass(styles.formBtns);
 
     expect(resetInput).toBeInTheDocument();
     expect(resetInput).toHaveAttribute('type', 'reset');
-    expect(resetInput).toHaveClass('form_btns');
+    expect(resetInput).toHaveClass(styles.formBtns);
   });
 
   it('if the values passed to the form are valid, then the form should not contain error messages and be empty', async () => {
@@ -119,6 +120,7 @@ describe('AddNewWordForm component', () => {
       imageInput,
       consentInput,
       submitInput,
+      container,
     } = setup();
 
     await act(async () => {
@@ -153,13 +155,18 @@ describe('AddNewWordForm component', () => {
       fireEvent.blur(submitInput);
     });
 
-    fireEvent.click(screen.getByText('Cool!'));
-
-    expect(enWordInput.value).toBe(emptyFormValues.enWord);
-    expect(beWordInput.value).toBe(emptyFormValues.beWord);
-    expect(ltnWordInput.value).toBe(emptyFormValues.ltnWord);
-    expect(dateInput.value).toBe(emptyFormValues.date);
-    expect(consentInput.checked).toBe(emptyFormValues.consent);
+    setTimeout(() => {
+      expect(container.querySelector('.backdrop')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+        /Word succesfully added!/i,
+      );
+      fireEvent.click(screen.getByText('Cool!'));
+      expect(enWordInput.value).toBe(emptyFormValues.enWord);
+      expect(beWordInput.value).toBe(emptyFormValues.beWord);
+      expect(ltnWordInput.value).toBe(emptyFormValues.ltnWord);
+      expect(dateInput.value).toBe(emptyFormValues.date);
+      expect(consentInput.checked).toBe(emptyFormValues.consent);
+    }, 500);
   });
 
   it('after clicking submit in an empty form, all required fields should have signatures with errors and styles should change', async () => {
@@ -179,12 +186,12 @@ describe('AddNewWordForm component', () => {
       fireEvent.blur(submitInput);
     });
 
-    expect(enWordInput).toHaveClass('error');
-    expect(beWordInput).toHaveClass('error');
-    expect(ltnWordInput).toHaveClass('error');
-    expect(dateInput).toHaveClass('error');
-    expect(imageInput).toHaveClass('error');
+    expect(enWordInput).toHaveClass(styles.error);
+    expect(beWordInput).toHaveClass(styles.error);
+    expect(ltnWordInput).toHaveClass(styles.error);
+    expect(dateInput).toHaveClass(styles.error);
+    expect(imageInput).toHaveClass(styles.error);
     expect(consentInput.checked).toBe(emptyFormValues.consent);
-    expect(container.getElementsByClassName('error-msg').length).toBe(6);
+    expect(container.getElementsByClassName(styles.errorMsg).length).toBe(6);
   });
 });

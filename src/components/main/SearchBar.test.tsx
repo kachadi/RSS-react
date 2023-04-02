@@ -1,6 +1,8 @@
 import { describe, it } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
+import styles from './SearchBar.module.css';
+
 
 const testSearchValue = 'dog';
 
@@ -18,7 +20,7 @@ describe('SearchBar component', () => {
     const { searchInput } = setup();
     expect(searchInput).toBeInTheDocument();
     expect(searchInput).toHaveAttribute('type', 'text');
-    expect(searchInput).toHaveClass('search-input');
+    expect(searchInput).toHaveClass(styles.searchInput);
   });
 
   it('pass value to search input', () => {

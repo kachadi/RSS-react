@@ -1,26 +1,23 @@
-import { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
-import './NavItem.css';
+import styles from './NavItem.module.css';
 
 interface NavItemProps {
   title: string;
   path: string;
 }
 
-class NavItem extends PureComponent<NavItemProps> {
-  render() {
-    const { title, path } = this.props;
-    return (
-      <li>
-        <NavLink
-          to={path}
-          className={({ isActive }) => (isActive ? 'nav-link_active' : 'nav-link')}
-        >
-          {title}
-        </NavLink>
-      </li>
-    );
-  }
+function NavItem(props: NavItemProps) {
+  const { title, path } = props;
+  return (
+    <li>
+      <NavLink
+        to={path}
+        className={({ isActive }) => (isActive ? `${styles.navLinkActive}` : `${styles.navLink}`)}
+      >
+        {title}
+      </NavLink>
+    </li>
+  );
 }
 
 export default NavItem;
