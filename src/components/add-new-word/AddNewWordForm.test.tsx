@@ -120,6 +120,7 @@ describe('AddNewWordForm component', () => {
       imageInput,
       consentInput,
       submitInput,
+      container,
     } = setup();
 
     await act(async () => {
@@ -155,7 +156,10 @@ describe('AddNewWordForm component', () => {
     });
 
     setTimeout(() => {
-      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(/Word succesfully added!/i);
+      expect(container.querySelector('.backdrop')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+        /Word succesfully added!/i,
+      );
       fireEvent.click(screen.getByText('Cool!'));
       expect(enWordInput.value).toBe(emptyFormValues.enWord);
       expect(beWordInput.value).toBe(emptyFormValues.beWord);
