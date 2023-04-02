@@ -19,7 +19,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IAddNewWordFormInputs>({ mode: 'onSubmit' });
+  } = useForm<IAddNewWordFormInputs>();
 
   const [isFormSubmit, setIsFormSubmit] = useState(false);
 
@@ -35,7 +35,6 @@ function AddNewWordForm(props: AddNewWordFormProps) {
       category: data.category,
     };
     props.onAddNewWord(newItem);
-    reset();
     setIsFormSubmit(true);
   };
 
@@ -44,6 +43,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
   };
 
   const addModal = () => {
+    reset();
     setIsFormSubmit(false);
   };
 
@@ -67,85 +67,73 @@ function AddNewWordForm(props: AddNewWordFormProps) {
     return true;
   };
 
-  const isImageFile = (value: Blob[] | MediaSource[]) => value[0].type.includes('image/');
+  const isImageFile = (value: FileList) => value[0].type.includes('image/');
 
-  const registerEnWord = {
-    ...register('enWord', {
-      required: FORM_ERROR_MESSAGES.notEmpty,
-      minLength: {
-        value: 3,
-        message: FORM_ERROR_MESSAGES.minLengthWords,
-      },
-      maxLength: {
-        value: 12,
-        message: FORM_ERROR_MESSAGES.maxLengthWords,
-      },
-      pattern: {
-        value: /^[^0-9]+$/,
-        message: FORM_ERROR_MESSAGES.onlyLettersWords,
-      },
-    }),
+  const validationSchemaEnWord = {
+    required: FORM_ERROR_MESSAGES.notEmpty,
+    minLength: {
+      value: 3,
+      message: FORM_ERROR_MESSAGES.minLengthWords,
+    },
+    maxLength: {
+      value: 12,
+      message: FORM_ERROR_MESSAGES.maxLengthWords,
+    },
+    pattern: {
+      value: /^[^0-9]+$/,
+      message: FORM_ERROR_MESSAGES.onlyLettersWords,
+    },
   };
 
-  const registerBeWord = {
-    ...register('beWord', {
-      required: FORM_ERROR_MESSAGES.notEmpty,
-      minLength: {
-        value: 3,
-        message: FORM_ERROR_MESSAGES.minLengthWords,
-      },
-      maxLength: {
-        value: 12,
-        message: FORM_ERROR_MESSAGES.maxLengthWords,
-      },
-      pattern: {
-        value: /^[^0-9]+$/,
-        message: FORM_ERROR_MESSAGES.onlyLettersWords,
-      },
-    }),
+  const validationSchemaBeWord = {
+    required: FORM_ERROR_MESSAGES.notEmpty,
+    minLength: {
+      value: 3,
+      message: FORM_ERROR_MESSAGES.minLengthWords,
+    },
+    maxLength: {
+      value: 12,
+      message: FORM_ERROR_MESSAGES.maxLengthWords,
+    },
+    pattern: {
+      value: /^[^0-9]+$/,
+      message: FORM_ERROR_MESSAGES.onlyLettersWords,
+    },
   };
 
-  const registerLtnWord = {
-    ...register('ltnWord', {
-      required: FORM_ERROR_MESSAGES.notEmpty,
-      minLength: {
-        value: 3,
-        message: FORM_ERROR_MESSAGES.minLengthWords,
-      },
-      maxLength: {
-        value: 12,
-        message: FORM_ERROR_MESSAGES.maxLengthWords,
-      },
-      pattern: {
-        value: /^[^0-9]+$/,
-        message: FORM_ERROR_MESSAGES.onlyLettersWords,
-      },
-    }),
+  const validationSchemaLtnWord = {
+    required: FORM_ERROR_MESSAGES.notEmpty,
+    minLength: {
+      value: 3,
+      message: FORM_ERROR_MESSAGES.minLengthWords,
+    },
+    maxLength: {
+      value: 12,
+      message: FORM_ERROR_MESSAGES.maxLengthWords,
+    },
+    pattern: {
+      value: /^[^0-9]+$/,
+      message: FORM_ERROR_MESSAGES.onlyLettersWords,
+    },
   };
 
-  const registerDate = {
-    ...register('date', {
-      required: FORM_ERROR_MESSAGES.notEmpty,
-      validate: {
-        isFuture: (v) => isFuture(v) || FORM_ERROR_MESSAGES.futureDate,
-        isValidTimeframe: (v) => isValidTimeframe(v) || FORM_ERROR_MESSAGES.validTimeframe,
-      },
-    }),
+  const validationSchemaDate = {
+    required: FORM_ERROR_MESSAGES.notEmpty,
+    validate: {
+      isFuture: (v: string) => isFuture(v) || FORM_ERROR_MESSAGES.futureDate,
+      isValidTimeframe: (v: string) => isValidTimeframe(v) || FORM_ERROR_MESSAGES.validTimeframe,
+    },
   };
 
-  const registerUploadImage = {
-    ...register('image', {
-      required: FORM_ERROR_MESSAGES.notEmpty,
-      validate: {
-        isImage: (v) => isImageFile(v) || FORM_ERROR_MESSAGES.image,
-      },
-    }),
+  const validationSchemaUploadImage = {
+    required: FORM_ERROR_MESSAGES.notEmpty,
+    validate: {
+      isImage: (v: FileList) => isImageFile(v) || FORM_ERROR_MESSAGES.image,
+    },
   };
 
-  const registerConsent = {
-    ...register('consent', {
-      required: FORM_ERROR_MESSAGES.consent,
-    }),
+  const validationSchemaConsent = {
+    required: FORM_ERROR_MESSAGES.consent,
   };
 
   return (
@@ -162,7 +150,9 @@ function AddNewWordForm(props: AddNewWordFormProps) {
         >
           <div className={styles.formControls}>
             <FormInput
-              register={registerEnWord}
+              register={register}
+              name='enWord'
+              validationSchema={validationSchemaEnWord}
               error={errors.enWord}
               id={INPUTS[0].id}
               type={INPUTS[0].type}
@@ -172,7 +162,9 @@ function AddNewWordForm(props: AddNewWordFormProps) {
             />
 
             <FormInput
-              register={registerBeWord}
+              register={register}
+              name='beWord'
+              validationSchema={validationSchemaBeWord}
               error={errors.beWord}
               id={INPUTS[1].id}
               type={INPUTS[1].type}
@@ -182,7 +174,9 @@ function AddNewWordForm(props: AddNewWordFormProps) {
             />
 
             <FormInput
-              register={registerLtnWord}
+              register={register}
+              name='ltnWord'
+              validationSchema={validationSchemaLtnWord}
               error={errors.ltnWord}
               id={INPUTS[2].id}
               type={INPUTS[2].type}
@@ -192,7 +186,9 @@ function AddNewWordForm(props: AddNewWordFormProps) {
             />
 
             <FormInput
-              register={registerDate}
+              register={register}
+              name='date'
+              validationSchema={validationSchemaDate}
               error={errors.date}
               id={INPUTS[3].id}
               type={INPUTS[3].type}
@@ -209,7 +205,9 @@ function AddNewWordForm(props: AddNewWordFormProps) {
             </select>
 
             <FormInput
-              register={registerUploadImage}
+              register={register}
+              name='image'
+              validationSchema={validationSchemaUploadImage}
               error={errors.image}
               id={INPUTS[4].id}
               type={INPUTS[4].type}
@@ -218,7 +216,11 @@ function AddNewWordForm(props: AddNewWordFormProps) {
 
             <label className={styles.checkboxContainer}>
               I consent to my personal data:
-              <input type='checkbox' {...registerConsent} defaultChecked={false} />
+              <input
+                type='checkbox'
+                {...register('consent', { ...validationSchemaConsent })}
+                defaultChecked={false}
+              />
               <span className={styles.checkmark} />
             </label>
             <div
@@ -273,5 +275,3 @@ function AddNewWordForm(props: AddNewWordFormProps) {
 }
 
 export default AddNewWordForm;
-
-

@@ -1,19 +1,8 @@
-import { FieldError, UseFormRegister } from 'react-hook-form';
-import { IAddNewWordFormInputs } from './addNewWordForm.interface';
+import { IFormInputProps } from './addNewWordForm.interface';
 import styles from './AddNewWordForm.module.css';
 
-interface FormInputProps {
-  register: UseFormRegister<IAddNewWordFormInputs> ;
-  label?: string;
-  id: string;
-  type: string;
-  error: FieldError | undefined;
-  autoComplete?: string;
-  placeholder?: string;
-}
-
-export function FormInput(props: FormInputProps) {
-  const { register, label, id, type, error, ...inputProps } = props;
+export function FormInput(props: IFormInputProps) {
+  const { register, name, label, id, type, error, validationSchema, ...inputProps } = props;
 
   let labelTag;
 
@@ -41,7 +30,7 @@ export function FormInput(props: FormInputProps) {
     <>
       {labelTag}
       <input
-        {...register}
+        {...register(name, validationSchema)}
         id={id}
         type={type}
         {...inputProps}
