@@ -20,6 +20,7 @@ function Item(props: ItemProps) {
     soundPath,
     category,
   } = props;
+
   return (
     <li className={styles.itemCardWrapper}>
       <div className={styles.itemCard}>

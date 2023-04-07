@@ -1,14 +1,18 @@
-import mockItems from '../../constants/mockData';
+import { useState } from 'react';
 import { IItem } from '../../models/item.model';
 import ItemsList from '../main/cards/ItemsList';
 import SearchBar from '../main/SearchBar';
 
 function Main() {
-  const searchingItems: IItem[] = mockItems.slice(0, 8);
+  const [searchingItems, setSearchingItems] = useState<IItem[]>([]);
+
+  const addSearchingItems = (items: IItem[]) => {
+    setSearchingItems(items);
+  };
 
   return (
     <div className='wrapper'>
-      <SearchBar />
+      <SearchBar onAddSearchingItems={addSearchingItems} />
       <ItemsList items={searchingItems} />
     </div>
   );

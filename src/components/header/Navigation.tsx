@@ -1,4 +1,4 @@
-import routes from '../../routes/routes';
+import routes from '../../constants/routes';
 import NavItem from './NavItem';
 import styles from './Navigation.module.css';
 

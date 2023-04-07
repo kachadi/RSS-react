@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import Main from '../../pages/Main';
 import styles from './ItemsList.module.css';
 
-
 describe('ItemsList component', () => {
   it('renders the ItemList component', () => {
     render(<Main />);

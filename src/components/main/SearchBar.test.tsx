@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
 import styles from './SearchBar.module.css';
 
-
 const testSearchValue = 'dog';
 
 const setup = () => {
