@@ -7,7 +7,7 @@ describe('SuccessAddedModal component', () => {
     render(
       <SuccessAddedModal
         // eslint-disable-next-line react/jsx-no-bind
-        onAddModal={(): void => {
+        onCloseModal={(): void => {
           throw new Error('Function not implemented.');
         }}
       />,

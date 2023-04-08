@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import fetchItems from '../../api/fetchAPI';
+import { fetchItems } from '../../api/fetchAPI';
 import { IItem } from '../../models/item.model';
 import styles from './SearchBar.module.css';
 
@@ -45,6 +45,7 @@ function SearchBar(props: SearchBarProps) {
   const searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
     setSearchValue(inputValue);
+    setInputValue('');
   };
 
   return (

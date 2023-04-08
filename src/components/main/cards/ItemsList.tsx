@@ -40,6 +40,7 @@ function ItemsList(props: ItemListProps) {
         {currentCards.map((item) => (
           <Item
             key={item.id}
+            id={item.id}
             beTitle={item.beTitle}
             ltnTitle={item.ltnTitle}
             enTitle={item.enTitle}
