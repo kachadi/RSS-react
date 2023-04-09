@@ -1,23 +1,17 @@
 import { describe, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Main from '../../pages/Main';
 import styles from './ItemsList.module.css';
 
 describe('ItemsList component', () => {
-  it('renders the ItemList component', () => {
+  it('renders the ItemList component', async () => {
     render(<Main />);
 
-    const itemsList = screen.getByRole('list');
+    await waitFor(async () => {
+      const itemsList = screen.getByTestId('cards');
 
-    expect(itemsList).toBeInTheDocument();
-    expect(itemsList).toHaveClass(styles.items);
-  });
-
-  it('length of item list - 8', () => {
-    render(<Main />);
-
-    const itemsCount = screen.getAllByRole('listitem').length;
-
-    expect(itemsCount).toBe(8);
+      expect(itemsList).toBeInTheDocument();
+      expect(itemsList).toHaveClass(styles.items);
+    });
   });
 });

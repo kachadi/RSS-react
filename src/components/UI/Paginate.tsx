@@ -24,7 +24,7 @@ function Paginate({
 
   return (
     <div className={styles.paginationContainer}>
-      <ul className={styles.pagination}>
+      <ul className={styles.pagination} data-testid='paginate'>
         <li className={styles.pageNumber}>
           <span onClick={previousPage}>&#8249;</span>
         </li>

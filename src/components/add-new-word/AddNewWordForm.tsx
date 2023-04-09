@@ -26,7 +26,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
   const onSubmit: SubmitHandler<IAddNewWordFormInputs> = (data) => {
     const transformedUploadedImage = URL.createObjectURL(data.image[0]);
     const newItem: IItem = {
-      id: Math.random(),
+      id: `${Math.random()}`,
       beTitle: data.beWord,
       ltnTitle: data.ltnWord,
       enTitle: data.enWord,

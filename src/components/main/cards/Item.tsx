@@ -5,7 +5,7 @@ import styles from './Item.module.css';
 import ItemDescriptionModal from './ItemDescriptionModal';
 
 interface ItemProps {
-  key: number;
+  key: string;
   id: string;
   beTitle: string;
   ltnTitle: string;

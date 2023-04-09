@@ -36,7 +36,7 @@ function ItemsList(props: ItemListProps) {
 
   return (
     <>
-      <ul className={styles.items}>
+      <ul className={styles.items} data-testid='cards'>
         {currentCards.map((item) => (
           <Item
             key={item.id}
