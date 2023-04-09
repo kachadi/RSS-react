@@ -1,0 +1,22 @@
+.noResultsWrapper {
+  padding-top: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noResultsMsg {
+  width: fit-content;
+  padding: 4rem;
+  font-size: 2rem;
+  background-color: #fffffd;
+  border: #001e1d 0.3rem solid;
+  border-radius: 2rem;
+  text-align: center;
+  line-height: 3.5rem;
+}
+
+.noResultsMsg span {
+  font-weight: normal;
+  font-style: italic;
+}

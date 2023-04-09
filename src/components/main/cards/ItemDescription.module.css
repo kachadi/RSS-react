@@ -5,7 +5,6 @@
 .descriptionWrapper {
   position: relative;
   width: 100rem;
-  /* height: 40rem; */
   display: grid;
   grid-template-columns: 40% 60%;
   align-items: center;
@@ -18,14 +17,14 @@
 
 .descriptionContainer {
   height: 100%;
-  padding: 3rem 3rem 3rem 0;
+  padding: 3rem 5rem 3rem 0;
   display: flex;
   flex-direction: column;
 }
 
 .category {
   position: absolute;
-  left: 2rem;
+  left: 3rem;
   bottom: 0;
   padding: 0 1.5rem;
   height: 2.5rem;
@@ -63,7 +62,6 @@
   display: flex;
   margin-top: 3rem;
   font-size: 1.5rem;
-  /* text-transform: capitalize; */
 }
 
 .textDesc {

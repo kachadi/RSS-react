@@ -1,10 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { GridLoader } from 'react-spinners';
 import { fetchItems } from '../../api/fetchAPI';
 import { IItem } from '../../models/item.model';
 import styles from './SearchBar.module.css';
 
+const override: CSSProperties = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  display: 'block',
+  margin: '0 auto',
+};
+
 interface SearchBarProps {
   onAddSearchingItems: (items: IItem[]) => void;
+  setIsNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 function SearchBar(props: SearchBarProps) {
@@ -13,7 +25,6 @@ function SearchBar(props: SearchBarProps) {
   const [searchValue, setSearchValue] = useState(inputValue);
   const inputValueRef: React.MutableRefObject<string> = useRef('');
 
-  // const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,8 +41,20 @@ function SearchBar(props: SearchBarProps) {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoaded(true);
-      const result = await fetchItems(searchValue);
-      props.onAddSearchingItems(result);
+      props.setError(null);
+      try {
+        const result = await fetchItems(searchValue);
+
+        if (result.length === 0) {
+          props.setIsNotFound(true);
+        } else {
+          props.setIsNotFound(false);
+        }
+        props.onAddSearchingItems(result);
+      } catch (error) {
+        if (error instanceof Error) props.setError(error.message);
+      }
+
       setIsLoaded(false);
     };
 
@@ -50,7 +73,16 @@ function SearchBar(props: SearchBarProps) {
 
   return (
     <>
-      {isLoaded && <div>Loading ...</div>}
+      {isLoaded && (
+        <GridLoader
+          color='#f9bc60'
+          loading={isLoaded}
+          cssOverride={override}
+          size={10}
+          aria-label='Loading Spinner'
+          data-testid='loader'
+        />
+      )}
       <form className={styles.searchForm} onSubmit={searchFormHandler}>
         <div className='form-control'>
           <input

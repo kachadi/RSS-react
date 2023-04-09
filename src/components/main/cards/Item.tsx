@@ -26,14 +26,19 @@ function Item(props: ItemProps) {
   };
 
   const clickItemHandler = async () => {
-    const fetchedItemDescription = await fetchItemDescription(id);
-    setItemDescription(fetchedItemDescription);
-    setIsItemDescriptionOpen(true);
+    try {
+      const fetchedItemDescription = await fetchItemDescription(id);
+      setItemDescription(fetchedItemDescription);
+      setIsItemDescriptionOpen(true);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      if (error instanceof Error) console.log(`Error: ${error.message}`);
+    }
   };
 
   return (
     <>
-      {(isItemDescriptionOpen && itemDescription) && (
+      {isItemDescriptionOpen && itemDescription && (
         <ItemDescriptionModal itemDescription={itemDescription} onCloseModal={closeModal} />
       )}
       <li className={styles.itemCardWrapper}>

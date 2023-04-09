@@ -39,8 +39,6 @@ const fetchItemDescription = async (id: string) => {
     examples: parsedResponse[0].examples,
   };
 
-  // throw new Error(`smth went wrong`);
-
   return itemDescription;
 };
 
