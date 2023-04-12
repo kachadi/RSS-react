@@ -157,10 +157,12 @@ describe('AddNewWordForm component', () => {
 
     setTimeout(() => {
       expect(container.querySelector('.backdrop')).toBeInTheDocument();
+      expect(container.querySelector('.modal')).toBeInTheDocument();
       expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
         /Word succesfully added!/i,
       );
       fireEvent.click(screen.getByText('Cool!'));
+      expect(container.querySelector('.modal')).not.toBeInTheDocument();
       expect(enWordInput.value).toBe(emptyFormValues.enWord);
       expect(beWordInput.value).toBe(emptyFormValues.beWord);
       expect(ltnWordInput.value).toBe(emptyFormValues.ltnWord);

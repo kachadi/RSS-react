@@ -4,7 +4,7 @@ import CATEGORIES from '../../constants/categories';
 import FORM_ERROR_MESSAGES from '../../constants/errorMsgs';
 import INPUTS from '../../constants/inputs';
 import { IItem } from '../../models/item.model';
-import SuccessAddedModal from '../UI/SuccessAddedModal';
+import { SuccessAddedModal } from '../UI/SuccessAddedModal';
 import { IAddNewWordFormInputs } from './addNewWordForm.interface';
 import styles from './AddNewWordForm.module.css';
 import { FormInput } from './FormInput';
@@ -26,7 +26,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
   const onSubmit: SubmitHandler<IAddNewWordFormInputs> = (data) => {
     const transformedUploadedImage = URL.createObjectURL(data.image[0]);
     const newItem: IItem = {
-      id: Math.random(),
+      id: `${Math.random()}`,
       beTitle: data.beWord,
       ltnTitle: data.ltnWord,
       enTitle: data.enWord,
@@ -42,7 +42,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
     reset();
   };
 
-  const addModal = () => {
+  const CloseModal = () => {
     reset();
     setIsFormSubmit(false);
   };
@@ -138,7 +138,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
 
   return (
     <>
-      {isFormSubmit && <SuccessAddedModal onAddModal={addModal} />}
+      {isFormSubmit && <SuccessAddedModal onCloseModal={CloseModal} />}
       <div className={styles.formWrapper}>
         <h1>Add a new word</h1>
 

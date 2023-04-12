@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
 import styles from './SearchBar.module.css';
 
-
 const testSearchValue = 'dog';
 
 const setup = () => {
@@ -31,14 +30,14 @@ describe('SearchBar component', () => {
     expect(searchInput.value).toBe(testSearchValue);
   });
 
-  it('does not change input on search button click', () => {
+  it('change input to empty string on search button click', () => {
     const { searchInput } = setup();
     expect(searchInput).toBeInTheDocument();
 
     fireEvent.change(searchInput, { target: { value: testSearchValue } });
     expect(searchInput.value).toBe(testSearchValue);
     fireEvent.click(screen.getByText('search'));
-    expect(searchInput.value).toBe(testSearchValue);
+    expect(searchInput.value).toBe('');
   });
 
   it('does not change input after going to another page', () => {
