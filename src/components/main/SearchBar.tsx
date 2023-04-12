@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { GridLoader } from 'react-spinners';
 import { fetchItems } from '../../api/fetchAPI';
 import { IItem } from '../../models/item.model';
@@ -21,22 +21,9 @@ interface SearchBarProps {
 
 function SearchBar(props: SearchBarProps) {
   const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
-
   const [searchValue, setSearchValue] = useState(inputValue);
-  const inputValueRef: React.MutableRefObject<string> = useRef('');
 
   const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    inputValueRef.current = inputValue;
-  }, [inputValue]);
-
-  useEffect(
-    () => () => {
-      localStorage.setItem('inputValue', inputValueRef.current);
-    },
-    [],
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,8 +54,8 @@ function SearchBar(props: SearchBarProps) {
 
   const searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    localStorage.setItem('inputValue', inputValue);
     setSearchValue(inputValue);
-    setInputValue('');
   };
 
   return (
