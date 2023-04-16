@@ -1,7 +1,8 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
 import styles from './AddNewWordForm.module.css';
+import addReduxProvider from '../../test-utils/addReduxProvider';
 
 const validFormValues = {
   enWord: 'Dog',
@@ -24,7 +25,7 @@ const emptyFormValues = {
 const setup = () => {
   window.history.pushState({}, '', '/new-word');
 
-  const utils = render(<App />);
+  const utils = render(addReduxProvider(<App />));
   const form: HTMLFormElement = screen.getByRole('form', { name: '' });
   const enWordInput: HTMLInputElement = screen.getByLabelText('Word in English:');
   const beWordInput: HTMLInputElement = screen.getByLabelText('Word in Belarusian:');

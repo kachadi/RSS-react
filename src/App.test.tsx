@@ -1,38 +1,35 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import App from './App';
+import addReduxProvider from './test-utils/addReduxProvider';
 
 describe('App component', () => {
-  it('renders the App component', () => {
-    render(<App />);
-  });
-
-  it('renders the App component and do not find word login at page', () => {
-    render(<App />);
-    expect(screen.queryByText(/login/i)).not.toBeInTheDocument();
+  it('should render App component', () => {
+    render(addReduxProvider(<App />));
+    expect(screen.getByText(/search/i)).toBeInTheDocument();
   });
 });
 
-describe('Router', () => {
+describe('test Router', () => {
   it('renders the NotFound page if route is not handled', () => {
     window.history.pushState({}, '', '/login');
 
-    render(<App />);
+    render(addReduxProvider(<App />));
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/not found/i);
   });
 
   it('renders the About us page if route is about-us', () => {
     window.history.pushState({}, '', '/about-us');
 
-    render(<App />);
+    render(addReduxProvider(<App />));
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/about us/i);
   });
 
   it('renders the Add new form page if route is new-word', () => {
     window.history.pushState({}, '', '/new-word');
 
-    render(<App />);
+    render(addReduxProvider(<App />));
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/new word/i);
   });
 });

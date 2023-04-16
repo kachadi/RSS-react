@@ -1,43 +1,61 @@
-import { useState } from 'react';
-import { IItem } from '../../models/item.model';
+import { CSSProperties } from 'react';
+import { GridLoader } from 'react-spinners';
+import useSearchValue from '../../hooks/useSearchValue';
+import { useGetSearchItemsQuery } from '../../store/api/api';
 import ItemsList from '../main/cards/ItemsList';
 import SearchBar from '../main/SearchBar';
 import styles from './Main.module.css';
 
-function Main() {
-  const [isNotFound, setIsNotFound] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [searchingItems, setSearchingItems] = useState<IItem[]>([]);
+const override: CSSProperties = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  display: 'block',
+  margin: '0 auto',
+};
 
-  const addSearchingItems = (items: IItem[]) => {
-    setSearchingItems(items);
-  };
+function Main() {
+  const { searchValue } = useSearchValue();
+  const {
+    isLoading,
+    data: items,
+    isSuccess,
+    isFetching,
+    isError,
+  } = useGetSearchItemsQuery(searchValue);
 
   return (
     <div className='wrapper'>
-      <SearchBar
-        onAddSearchingItems={addSearchingItems}
-        setIsNotFound={setIsNotFound}
-        setError={setError}
-      />
+      <SearchBar />
 
-      {error && (
+      {isError && (
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>
             Opps! Something went wrong 😱
             <br />
-            Error message: <span>{error}</span>
+            Error message: <span>{isError}</span>
           </p>
         </div>
       )}
 
-      {!error && isNotFound && (
+      {isLoading ||
+        (isFetching && (
+          <GridLoader
+            color='#f9bc60'
+            loading={isLoading}
+            cssOverride={override}
+            size={10}
+            aria-label='Loading Spinner'
+            data-testid='loader'
+          />
+        ))}
+      {isSuccess && !isFetching && items.length === 0 && (
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>No Results Found 😔</p>
         </div>
       )}
-
-      {!error && !isNotFound && <ItemsList items={searchingItems} />}
+      {isSuccess && !isFetching && <ItemsList items={items} />}
     </div>
   );
 }

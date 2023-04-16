@@ -3,23 +3,22 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import CATEGORIES from '../../constants/categories';
 import FORM_ERROR_MESSAGES from '../../constants/errorMsgs';
 import INPUTS from '../../constants/inputs';
+import useActions from '../../hooks/useActions';
 import { IItem } from '../../models/item.model';
 import { SuccessAddedModal } from '../UI/SuccessAddedModal';
 import { IAddNewWordFormInputs } from './addNewWordForm.interface';
 import styles from './AddNewWordForm.module.css';
 import { FormInput } from './FormInput';
 
-interface AddNewWordFormProps {
-  onAddNewWord: (item: IItem) => void;
-}
-
-function AddNewWordForm(props: AddNewWordFormProps) {
+function AddNewWordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<IAddNewWordFormInputs>();
+
+  const { addFormItems } = useActions();
 
   const [isFormSubmit, setIsFormSubmit] = useState(false);
 
@@ -34,7 +33,7 @@ function AddNewWordForm(props: AddNewWordFormProps) {
       soundPath: '',
       category: data.category,
     };
-    props.onAddNewWord(newItem);
+    addFormItems(newItem);
     setIsFormSubmit(true);
   };
 

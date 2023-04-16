@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { fetchItemDescription } from '../../../api/fetchAPI';
 import { IItemDescription } from '../../../models/item.model';
+import { useGetWordDescriptionQuery } from '../../../store/api/word.api';
 import styles from './Item.module.css';
 import ItemDescriptionModal from './ItemDescriptionModal';
 
@@ -25,15 +25,12 @@ function Item(props: ItemProps) {
     setIsItemDescriptionOpen(false);
   };
 
-  const clickItemHandler = async () => {
-    try {
-      const fetchedItemDescription = await fetchItemDescription(id);
-      setItemDescription(fetchedItemDescription);
-      setIsItemDescriptionOpen(true);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      if (error instanceof Error) console.log(`Error: ${error.message}`);
-    }
+  const { data } = useGetWordDescriptionQuery(id);
+
+  const clickItemHandler = () => {
+    const fetchedItemDesc = data![0];
+    setItemDescription(fetchedItemDesc);
+    setIsItemDescriptionOpen(true);
   };
 
   return (

@@ -53,7 +53,9 @@
     "max-classes-per-file": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "react-hooks/exhaustive-deps": 0
+    "react-hooks/exhaustive-deps": 0,
+    "implicit-arrow-linebreak": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "react": {
