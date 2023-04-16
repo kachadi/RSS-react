@@ -1,27 +1,38 @@
-import { useState } from 'react';
-import { IItem } from '../../models/item.model';
+import { CSSProperties, useState } from 'react';
+import { GridLoader } from 'react-spinners';
+import { useGetSearchItemsQuery } from '../../store/api/api';
 import ItemsList from '../main/cards/ItemsList';
 import SearchBar from '../main/SearchBar';
 import styles from './Main.module.css';
 
-function Main() {
-  const [isNotFound, setIsNotFound] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [searchingItems, setSearchingItems] = useState<IItem[]>([]);
+const override: CSSProperties = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  display: 'block',
+  margin: '0 auto',
+};
 
-  const addSearchingItems = (items: IItem[]) => {
-    setSearchingItems(items);
+function Main() {
+  // const [isNotFound, setIsNotFound] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
+
+  const [searchingValue, setSearchingValue] = useState<string>('');
+
+  const { isLoading, data: items } = useGetSearchItemsQuery(searchingValue);
+
+  const getSearchingValue = (searchValue: string) => {
+    setSearchingValue(searchValue);
   };
 
   return (
     <div className='wrapper'>
       <SearchBar
-        onAddSearchingItems={addSearchingItems}
-        setIsNotFound={setIsNotFound}
-        setError={setError}
+        onGetSearchingValue={getSearchingValue}
       />
 
-      {error && (
+      {/* {error && (
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>
             Opps! Something went wrong 😱
@@ -35,9 +46,20 @@ function Main() {
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>No Results Found 😔</p>
         </div>
-      )}
+      )} */}
 
-      {!error && !isNotFound && <ItemsList items={searchingItems} />}
+      {isLoading ? (
+        <GridLoader
+          color='#f9bc60'
+          loading={isLoading}
+          cssOverride={override}
+          size={10}
+          aria-label='Loading Spinner'
+          data-testid='loader'
+        />
+      ) : (
+        <ItemsList items={items} />
+      )}
     </div>
   );
 }

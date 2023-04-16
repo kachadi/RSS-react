@@ -7,21 +7,17 @@ interface ItemDescriptionProps {
 }
 
 function ItemDescription(props: ItemDescriptionProps) {
-  const {
-    enTitle,
-    ltnTitle,
-    beTitle,
-    imagePath,
-    category,
-    description,
-    additional,
-    examples,
-  } = props.itemDescription;
+  const { enTitle, ltnTitle, beTitle, imagePath, category, description, additional, examples } =
+    props.itemDescription;
 
   return (
     <div className={`${styles.descModal} modal`}>
       <div className={styles.descriptionWrapper}>
-        <img src={imagePath} className={styles.itemImage} alt={enTitle} />
+        <img
+          src={`https://mock-server-api-seven.vercel.app/${imagePath}`}
+          className={styles.itemImage}
+          alt={enTitle}
+        />
         <div className={styles.descriptionContainer}>
           <div className={styles.category}>{category}</div>
           <div className={styles.titles}>

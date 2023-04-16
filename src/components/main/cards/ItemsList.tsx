@@ -44,7 +44,7 @@ function ItemsList(props: ItemListProps) {
             beTitle={item.beTitle}
             ltnTitle={item.ltnTitle}
             enTitle={item.enTitle}
-            imagePath={item.imagePath}
+            imagePath={`https://mock-server-api-seven.vercel.app/${item.imagePath}`}
             soundPath={item.soundPath}
             category={item.category}
           />

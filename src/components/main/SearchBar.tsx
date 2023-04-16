@@ -1,52 +1,20 @@
-import { CSSProperties, useEffect, useState } from 'react';
-import { GridLoader } from 'react-spinners';
-import { fetchItems } from '../../api/fetchAPI';
-import { IItem } from '../../models/item.model';
+import { useEffect, useState } from 'react';
 import styles from './SearchBar.module.css';
 
-const override: CSSProperties = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  display: 'block',
-  margin: '0 auto',
-};
-
 interface SearchBarProps {
-  onAddSearchingItems: (items: IItem[]) => void;
-  setIsNotFound: React.Dispatch<React.SetStateAction<boolean>>;
-  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  onGetSearchingValue: (searchValue: string) => void;
 }
 
 function SearchBar(props: SearchBarProps) {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
-  const [searchValue, setSearchValue] = useState(inputValue);
+  const [inputValue, setInputValue] = useState('');
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [searchValue, setSearchValue] = useState(inputValue);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoaded(true);
-      props.setError(null);
-      try {
-        const result = await fetchItems(searchValue);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
-        if (result.length === 0) {
-          props.setIsNotFound(true);
-        } else {
-          props.setIsNotFound(false);
-        }
-        props.onAddSearchingItems(result);
-      } catch (error) {
-        if (error instanceof Error) props.setError(error.message);
-      }
+  // useEffect(() => {
 
-      setIsLoaded(false);
-    };
-
-    fetchData();
-  }, [searchValue]);
+  // }, [searchValue]);
 
   const searchInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
@@ -54,40 +22,27 @@ function SearchBar(props: SearchBarProps) {
 
   const searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    localStorage.setItem('inputValue', inputValue);
-    setSearchValue(inputValue);
+    props.onGetSearchingValue(inputValue);
   };
 
   return (
-    <>
-      {isLoaded && (
-        <GridLoader
-          color='#f9bc60'
-          loading={isLoaded}
-          cssOverride={override}
-          size={10}
-          aria-label='Loading Spinner'
-          data-testid='loader'
+    <form className={styles.searchForm} onSubmit={searchFormHandler}>
+      <div className='form-control'>
+        <input
+          id='search'
+          type='text'
+          placeholder='start typing a word'
+          className={styles.searchInput}
+          onChange={searchInputHandler}
+          value={inputValue}
         />
-      )}
-      <form className={styles.searchForm} onSubmit={searchFormHandler}>
-        <div className='form-control'>
-          <input
-            id='search'
-            type='text'
-            placeholder='start typing a word'
-            className={styles.searchInput}
-            onChange={searchInputHandler}
-            value={inputValue}
-          />
-        </div>
-        <div className='form-action'>
-          <button type='submit' className={styles.searchBtn}>
-            search
-          </button>
-        </div>
-      </form>
-    </>
+      </div>
+      <div className='form-action'>
+        <button type='submit' className={styles.searchBtn}>
+          search
+        </button>
+      </div>
+    </form>
   );
 }
 
