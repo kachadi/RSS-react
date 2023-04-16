@@ -1,5 +1,6 @@
-import { CSSProperties, useState } from 'react';
+import { CSSProperties } from 'react';
 import { GridLoader } from 'react-spinners';
+import useSearchValue from '../../hooks/useSearchValue';
 import { useGetSearchItemsQuery } from '../../store/api/api';
 import ItemsList from '../main/cards/ItemsList';
 import SearchBar from '../main/SearchBar';
@@ -18,48 +19,47 @@ function Main() {
   // const [isNotFound, setIsNotFound] = useState(false);
   // const [error, setError] = useState<string | null>(null);
 
-  const [searchingValue, setSearchingValue] = useState<string>('');
-
-  const { isLoading, data: items } = useGetSearchItemsQuery(searchingValue);
-
-  const getSearchingValue = (searchValue: string) => {
-    setSearchingValue(searchValue);
-  };
+  const { searchValue } = useSearchValue();
+  const {
+    isLoading,
+    data: items,
+    isSuccess,
+    isFetching,
+    isError,
+  } = useGetSearchItemsQuery(searchValue);
 
   return (
     <div className='wrapper'>
-      <SearchBar
-        onGetSearchingValue={getSearchingValue}
-      />
+      <SearchBar />
 
-      {/* {error && (
+      {isError && (
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>
             Opps! Something went wrong 😱
             <br />
-            Error message: <span>{error}</span>
+            Error message: <span>{isError}</span>
           </p>
         </div>
       )}
 
-      {!error && isNotFound && (
+      {/*       {!error && isNotFound && (
         <div className={styles.noResultsWrapper}>
           <p className={styles.noResultsMsg}>No Results Found 😔</p>
         </div>
-      )} */}
+      )}  */}
 
-      {isLoading ? (
-        <GridLoader
-          color='#f9bc60'
-          loading={isLoading}
-          cssOverride={override}
-          size={10}
-          aria-label='Loading Spinner'
-          data-testid='loader'
-        />
-      ) : (
-        <ItemsList items={items} />
-      )}
+      {isLoading ||
+        (isFetching && (
+          <GridLoader
+            color='#f9bc60'
+            loading={isLoading}
+            cssOverride={override}
+            size={10}
+            aria-label='Loading Spinner'
+            data-testid='loader'
+          />
+        ))}
+      {isSuccess && !isFetching && <ItemsList items={items} />}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { reducer as searchValueReducer } from './search-value/searchValue.slice'
 import { reducer as formItemsReducer } from './form-items/formItems.slice';
 
 const reducers = combineReducers({
-  search: searchValueReducer,
+  searchValue: searchValueReducer,
   formItems: formItemsReducer,
   [api.reducerPath]: api.reducer,
 });

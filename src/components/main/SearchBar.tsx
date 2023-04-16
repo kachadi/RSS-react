@@ -1,20 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useActions from '../../hooks/useActions';
+import useSearchValue from '../../hooks/useSearchValue';
 import styles from './SearchBar.module.css';
 
-interface SearchBarProps {
-  onGetSearchingValue: (searchValue: string) => void;
-}
+function SearchBar() {
+  const { searchValue } = useSearchValue();
 
-function SearchBar(props: SearchBarProps) {
-  const [inputValue, setInputValue] = useState('');
-
-  // const [searchValue, setSearchValue] = useState(inputValue);
-
-  // const [isLoaded, setIsLoaded] = useState(false);
-
-  // useEffect(() => {
-
-  // }, [searchValue]);
+  const [inputValue, setInputValue] = useState(searchValue);
+  const { addSearchValueToStore } = useActions();
 
   const searchInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
@@ -22,7 +15,7 @@ function SearchBar(props: SearchBarProps) {
 
   const searchFormHandler = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    props.onGetSearchingValue(inputValue);
+    addSearchValueToStore(inputValue);
   };
 
   return (

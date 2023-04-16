@@ -11,13 +11,20 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     getSearchItems: builder.query<IItem[], string>({
-      query: (searchValue) => `/catalog?beTitle_like=${searchValue}`,
-
+      query: (searchValue) => `/catalog?enTitle_like=${searchValue}`,
       providesTags: () => [
         {
           type: 'words',
         },
       ],
+      transformResponse: (response: IItem[]) =>
+        response.map((item) => {
+          const newImagePath = `https://mock-server-api-seven.vercel.app/${item.imagePath}`;
+          return {
+            ...item,
+            imagePath: newImagePath,
+          };
+        }),
     }),
   }),
 });

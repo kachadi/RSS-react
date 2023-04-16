@@ -1,12 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IItem } from '../../models/item.model';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: IItem[] = [];
+const initialState = { value: '' };
 
 export const searchValueSlice = createSlice({
   name: 'searchValue',
   initialState,
   reducers: {
+    addSearchValueToStore(state, { payload: searchValue }) {
+      state.value = searchValue;
+    },
   },
 });
 
