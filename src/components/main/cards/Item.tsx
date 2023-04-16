@@ -28,7 +28,7 @@ function Item(props: ItemProps) {
   const { data } = useGetWordDescriptionQuery(id);
 
   const clickItemHandler = () => {
-    const fetchedItemDesc = data[0];
+    const fetchedItemDesc = data![0];
     setItemDescription(fetchedItemDesc);
     setIsItemDescriptionOpen(true);
   };

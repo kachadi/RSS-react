@@ -16,9 +16,6 @@ const override: CSSProperties = {
 };
 
 function Main() {
-  // const [isNotFound, setIsNotFound] = useState(false);
-  // const [error, setError] = useState<string | null>(null);
-
   const { searchValue } = useSearchValue();
   const {
     isLoading,
@@ -42,12 +39,6 @@ function Main() {
         </div>
       )}
 
-      {/*       {!error && isNotFound && (
-        <div className={styles.noResultsWrapper}>
-          <p className={styles.noResultsMsg}>No Results Found 😔</p>
-        </div>
-      )}  */}
-
       {isLoading ||
         (isFetching && (
           <GridLoader
@@ -59,6 +50,11 @@ function Main() {
             data-testid='loader'
           />
         ))}
+      {isSuccess && !isFetching && items.length === 0 && (
+        <div className={styles.noResultsWrapper}>
+          <p className={styles.noResultsMsg}>No Results Found 😔</p>
+        </div>
+      )}
       {isSuccess && !isFetching && <ItemsList items={items} />}
     </div>
   );
