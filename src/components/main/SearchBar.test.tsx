@@ -1,12 +1,13 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
 import styles from './SearchBar.module.css';
+import addReduxProvider from '../../test-utils/addReduxProvider';
 
 const testSearchValue = 'dog';
 
 const setup = () => {
-  const utils = render(<App />);
+  const utils = render(addReduxProvider(<App />));
   const searchInput: HTMLInputElement = screen.getByRole('textbox');
   return {
     searchInput,
@@ -30,14 +31,14 @@ describe('SearchBar component', () => {
     expect(searchInput.value).toBe(testSearchValue);
   });
 
-  it('change input to empty string on search button click', () => {
+  it('change input to be not empty when search button click', () => {
     const { searchInput } = setup();
     expect(searchInput).toBeInTheDocument();
 
     fireEvent.change(searchInput, { target: { value: testSearchValue } });
     expect(searchInput.value).toBe(testSearchValue);
     fireEvent.click(screen.getByText('search'));
-    expect(searchInput.value).toBe('');
+    expect(searchInput.value).toBe(testSearchValue);
   });
 
   it('does not change input after going to another page', () => {

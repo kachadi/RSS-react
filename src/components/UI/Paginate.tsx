@@ -33,7 +33,9 @@ function Paginate({
             <div
               onClick={() => paginate(number)}
               className={
-                currentPage === (i + 1) ? `${styles.pageNumber} ${styles.active}` : `${styles.pageNumber}`
+                currentPage === i + 1
+                  ? `${styles.pageNumber} ${styles.active}`
+                  : `${styles.pageNumber}`
               }
             >
               {number}
